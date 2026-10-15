@@ -1,6 +1,6 @@
 # Dragi Linktree Social Media
 
-A mobile-first app download hub for Dragi's social profiles. Static HTML, CSS and JavaScript; no build, runtime dependencies, analytics or third-party font requests.
+A mobile-first app download hub for Dragi's social profiles. Static HTML, CSS and JavaScript; no build or runtime dependencies. Fonts are local. Google Analytics 4 loads only after a visitor allows analytics.
 
 ## Local preview
 
@@ -30,6 +30,7 @@ Social handles remain in their original language. Without JavaScript, the comple
 - `index.html`: semantic structure, English fallback, links and inline icons.
 - `style.css`: responsive design, animated gradient, hover/press effects and reduced-motion support.
 - `app.js`: translations, locale selection and small pointer interactions.
+- `analytics.js`: consent preferences and GA4 visit/button tracking. See [ANALYTICS.md](./ANALYTICS.md) for profile links and reporting.
 - `assets/`: locally hosted Dragi brand assets and Manrope variable font (SIL Open Font License; see `FONT-LICENSE.txt`). Dragi mascot sourced from https://progress.dragi.app/assets/mascot.png; app icon reused from the existing Dragi link hub.
 
 Store links are ordinary anchors in the same tab so mobile store handoff and in-app browsers can use their native navigation. The ripple never intercepts or delays navigation. Social and Progress links open a separate tab with `noopener noreferrer`. Animations stop for `prefers-reduced-motion: reduce`. No device-based redirection hides either store.
@@ -46,6 +47,6 @@ Repository: https://github.com/dragi-app/dragi-linktree-social-media
 
 Open **Settings → Pages → Deploy from a branch → main → / (root)**. All asset URLs are relative, so the project path works without a custom domain. `.nojekyll` prevents unnecessary Jekyll processing.
 
-Expected Pages URL: https://dragi-app.github.io/dragi-linktree-social-media/
+Published URL: https://social.links.dragi.app/
 
-There is intentionally no `CNAME`; this repository does not take over the existing `links.dragi.app` domain. If a different deployment URL is chosen, update the absolute `og:image` URL in `index.html`.
+`CNAME` preserves the owner's custom domain `social.links.dragi.app`. If it changes, update the absolute `og:image` URL and the production hostname/cookie domain in `analytics.js`.
