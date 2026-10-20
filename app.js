@@ -26,7 +26,8 @@
       "progressTitle": "Spanish from zero\nto B2 in one year.",
       "progressDescription": "Kyrylo’s goal, using Dragi and AI.\nFollow his progress and create your own challenge:\nyour language, your goal, your pace.",
       "progressCta": "Explore the challenge",
-      "footer": "Stories. Explanations. Practice."
+      "footer": "Stories. Explanations. Practice.",
+      "privacy": "Privacy policy"
     },
     "uk": {
       "pageTitle": "Dragi — розумій, як працює мова",
@@ -51,7 +52,8 @@
       "progressTitle": "Іспанська з нуля\nдо B2 за рік.",
       "progressDescription": "Ціль Кирила — із Dragi та ШІ.\nСтеж за процесом і створи власний челендж:\nсвоя мова, своя ціль, свій темп.",
       "progressCta": "Переглянути челендж",
-      "footer": "Історії. Пояснення. Практика."
+      "footer": "Історії. Пояснення. Практика.",
+      "privacy": "Політика конфіденційності"
     },
     "de": {
       "pageTitle": "Dragi — verstehe, wie Sprache funktioniert",
@@ -76,7 +78,8 @@
       "progressTitle": "Spanisch von null\nauf B2 in einem Jahr.",
       "progressDescription": "Kyrylos Ziel – mit Dragi und KI.\nVerfolge seinen Weg und starte deine eigene Challenge:\ndeine Sprache, dein Ziel, dein Tempo.",
       "progressCta": "Challenge entdecken",
-      "footer": "Geschichten. Erklärungen. Übungen."
+      "footer": "Geschichten. Erklärungen. Übungen.",
+      "privacy": "Datenschutzerklärung"
     },
     "es": {
       "pageTitle": "Dragi — entiende cómo funciona el idioma",
@@ -101,7 +104,8 @@
       "progressTitle": "Español de cero\na B2 en un año.",
       "progressDescription": "La meta de Kyrylo, con Dragi e IA.\nSigue su progreso y crea tu propio reto:\ntu idioma, tu meta, tu ritmo.",
       "progressCta": "Descubre el reto",
-      "footer": "Historias. Explicaciones. Práctica."
+      "footer": "Historias. Explicaciones. Práctica.",
+      "privacy": "Política de privacidad"
     }
   };
 

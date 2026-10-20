@@ -1,6 +1,6 @@
 # Dragi Linktree Social Media
 
-A mobile-first app download hub for Dragi's social profiles. Static HTML, CSS and JavaScript; no build or runtime dependencies. Fonts are local. Google Analytics 4 loads only after a visitor allows analytics.
+A mobile-first app download hub for Dragi's social profiles. Static HTML, CSS and JavaScript; no build or runtime dependencies. Fonts are local. Google Analytics 4 loads automatically on the production hostname, without a confirmation banner.
 
 ## Local preview
 
@@ -30,7 +30,7 @@ Social handles remain in their original language. Without JavaScript, the comple
 - `index.html`: semantic structure, English fallback, links and inline icons.
 - `style.css`: responsive design, animated gradient, hover/press effects and reduced-motion support.
 - `app.js`: translations, locale selection and small pointer interactions.
-- `analytics.js`: consent preferences and GA4 visit/button tracking. See [ANALYTICS.md](./ANALYTICS.md) for profile links and reporting.
+- `analytics.js`: GA4 visit/button tracking. See [ANALYTICS.md](./ANALYTICS.md) for profile links and reporting.
 - `assets/`: locally hosted Dragi brand assets and Manrope variable font (SIL Open Font License; see `FONT-LICENSE.txt`). Dragi mascot sourced from https://progress.dragi.app/assets/mascot.png; app icon reused from the existing Dragi link hub.
 
 Store links are ordinary anchors in the same tab so mobile store handoff and in-app browsers can use their native navigation. The ripple never intercepts or delays navigation. Social and Progress links open a separate tab with `noopener noreferrer`. Animations stop for `prefers-reduced-motion: reduce`. No device-based redirection hides either store.
