@@ -74,11 +74,50 @@ h1 > span { display: block; }
 .scroll-circle { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid #ffffff42; background: #ffffff05; transition: background .2s; }
 .scroll-circle .icon { width: 16px; height: 16px; }
 
+.nmt-hero .title-accent { font-size: .84em; text-wrap: balance; }
+.nmt-trial { display: inline-block; margin: 0 0 16px; padding: 7px 12px; border: 1px solid #f5cf9a75; border-radius: 24px; background: #f5cf9a14; color: #fff2dc; font-size: 11px; }
+.nmt-trial strong { color: var(--cream); font-weight: 800; }
+.nmt-trial-note, .nmt-planner p { margin: 12px 0 0; font-size: 11px; line-height: 1.55; color: #eee3f6; }
+.nmt-planner { margin-top: 18px; }
+.nmt-planner-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid #fff5e76b; border-radius: 12px; background: #2b153f66; font-size: 12px; font-weight: 700; }
+.nmt-planner-link:hover { background: #2b153f99; }
+.nmt-planner-link .icon { width: 16px; height: 16px; color: var(--cream); }
+.nmt-planner p { margin-top: 7px; }
+.nmt-included { margin-top: 42px; }
+.nmt-included .section-eyebrow { color: var(--cream); margin-bottom: 10px; }
+.nmt-included h3 { margin: 0; font-size: clamp(21px, 4vw, 27px); line-height: 1.25; letter-spacing: -.035em; }
+.nmt-included .section-description { max-width: 38ch; margin: 12px auto 22px; font-size: 13px; }
+.nmt-course-preview { perspective: 900px; padding: 0 8px; }
+.nmt-course-card {
+  position: relative;
+  overflow: hidden;
+  padding: 5px;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #ffda98, #d695ec 32%, #a7a0fa 57%, #f6b7dc 76%, #f6d1a0);
+  box-shadow: inset 0 0 0 1px #ffffff95, 0 4px 0 #533275, 0 14px 26px #24123370;
+  transform: rotateX(3deg) rotateY(-4deg);
+}
+.nmt-course-card img { width: 100%; height: auto; border-radius: 12px; }
+.nmt-course-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 33%, #ffc9fd33 46%, #ffffff4d 50%, #b5deff2b 56%, transparent 69%);
+  transform: translateX(-120%);
+}
+.nmt-course-preview.is-visible .nmt-course-card { animation: course-sway 4.6s ease-in-out both; }
+.nmt-course-preview.is-visible .nmt-course-card::after { animation: course-shine 2.6s .6s ease-in-out both; }
+.nmt-language-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 13px; font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.nmt-language-link .icon { width: 15px; height: 15px; color: var(--cream); }
+
 .community { width: calc(100% - 40px); max-width: 430px; margin: auto; padding: 46px 0 64px; text-align: center; scroll-margin-top: 24px; border-top: 1px solid #ffffff2e; }
 .community:focus { outline: none; }
 .section-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #eddded; margin: 0 0 14px; }
 h2 { font-size: 31px; line-height: 1.2; letter-spacing: -.04em; margin: 0; font-weight: 700; }
 .section-description { font-size: 12px; line-height: 1.8; color: #f3e9f3; margin: 15px 0 28px; }
+.subject-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; padding: 0; margin: 24px 0 0; }
+.subject-list li { border: 1px solid #fff5e74a; border-radius: 20px; background: #2b153f66; padding: 7px 12px; font-size: 12px; font-weight: 600; }
 .social-links { display: flex; flex-direction: column; gap: 10px; }
 .social-link { display: flex; align-items: center; gap: 14px; padding: 15px 17px; min-height: 78px; text-align: left; border: 1px solid #fff5e74a; border-radius: 13px; background: #2b153f66; transition: transform .2s, background .2s, border-color .2s; touch-action: manipulation; }
 .social-icon { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #ffffff24; border-radius: 10px; background: #ffffff09; color: #fff4e7; flex-shrink: 0; }
@@ -198,6 +237,11 @@ h2 { font-size: 31px; line-height: 1.2; letter-spacing: -.04em; margin: 0; font-
 @keyframes warm-drift { to { transform: translate(-9%, 13%) scale(1.08); } }
 @keyframes violet-drift { to { transform: translate(14%, -5%) scale(1.05); } }
 @keyframes tap-wave { to { transform: scale(20); opacity: 0; } }
+@keyframes course-sway {
+  35% { transform: rotateX(-2deg) rotateY(4deg) translateY(-3px); }
+  70% { transform: rotateX(4deg) rotateY(-2deg) translateY(-1px); }
+}
+@keyframes course-shine { to { transform: translateX(120%); } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }

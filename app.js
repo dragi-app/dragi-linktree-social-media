@@ -155,7 +155,7 @@
     picker.value = language;
   }
 
-  picker.addEventListener('change', () => {
+  picker?.addEventListener('change', () => {
     const language = normalizeLocale(picker.value) || 'en';
     try { localStorage.setItem(STORAGE_KEY, language); } catch { /* Choice works without storage. */ }
     const url = new URL(location.href);
@@ -201,7 +201,7 @@
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
-  render(initialLanguage());
+  if (picker) render(initialLanguage());
 
   // Reveal lower-page links once they enter the viewport; static links remain
   // visible when JavaScript, IntersectionObserver or motion is unavailable.
