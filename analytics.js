@@ -5,12 +5,13 @@
 
   const MEASUREMENT_ID = 'G-QCFG3R6J86';
   const COOKIE_MAX_AGE = 180 * 24 * 60 * 60;
+  const pageDirection = location.pathname?.startsWith('/nmt/') ? 'nmt' : 'languages';
   window.dataLayer = window.dataLayer || [];
 
   function tag() { window.dataLayer.push(arguments); }
   function language() { return document.documentElement.lang; }
   function track(name, parameters = {}) {
-    tag('event', name, { page_language: language(), ...parameters });
+    tag('event', name, { page_language: language(), page_direction: pageDirection, ...parameters });
   }
 
   tag('consent', 'default', {
@@ -21,7 +22,7 @@
   tag('config', MEASUREMENT_ID, {
     cookie_domain: 'social.links.dragi.app', cookie_expires: COOKIE_MAX_AGE,
     allow_google_signals: false, allow_ad_personalization_signals: false,
-    page_language: language()
+    page_language: language(), page_direction: pageDirection
   });
   const script = document.createElement('script');
   script.async = true;
@@ -30,9 +31,9 @@
 
   document.getElementById('app-store').addEventListener('click', () => track('app_store_click'));
   document.getElementById('google-play').addEventListener('click', () => track('play_store_click'));
-  document.getElementById('progress-link').addEventListener('click', () => track('progress_click'));
+  document.getElementById('progress-link')?.addEventListener('click', () => track('progress_click'));
   ['instagram', 'tiktok', 'youtube'].forEach(network => {
     document.querySelector(`.social-link.${network}`).addEventListener('click', () => track('social_click', { social_network: network }));
   });
-  document.getElementById('language').addEventListener('change', () => track('language_change'));
+  document.getElementById('language')?.addEventListener('change', () => track('language_change'));
 })();

@@ -10,6 +10,8 @@ python3 -m http.server 4174 --bind 127.0.0.1
 
 Open <http://127.0.0.1:4174/>. Explicit language previews: `?lan=en`, `?lan=uk`, `?lan=de`, `?lan=es`.
 
+The Ukrainian НМТ landing page is at <http://127.0.0.1:4174/nmt/>. It uses the same stores and styling, with a Ukrainian-first page and its own subjects, social profiles, and resources.
+
 ## Languages
 
 Priority: valid `?lan=` → saved manual selection → first supported browser language → English. Regional locales (including `uk-UA`, `de-AT` and `es-MX`) resolve to their base language. Unavailable browser storage does not prevent rendering or switching languages. A manual selection updates the query string without changing unrelated query parameters or the current fragment.
@@ -28,6 +30,7 @@ Social handles remain in their original language. Without JavaScript, the comple
 ## Editing
 
 - `index.html`: semantic structure, English fallback, links and inline icons.
+- `nmt/index.html`: Ukrainian НМТ landing page, subjects, and resources.
 - `style.css`: responsive design, animated gradient, hover/press effects and reduced-motion support.
 - `app.js`: translations, locale selection and small pointer interactions.
 - `analytics.js`: GA4 visit/button tracking. See [ANALYTICS.md](./ANALYTICS.md) for profile links and reporting.

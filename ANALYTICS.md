@@ -6,15 +6,20 @@ GA4: **Dragi Social Linktree**, ресурс `559265832`, вебпотік `1613
 
 ## Посилання для профілів
 
-| Профіль | Посилання |
-| --- | --- |
-| Instagram bio | https://social.links.dragi.app/?utm_source=instagram&utm_medium=social&utm_campaign=app_download&utm_content=bio |
-| TikTok bio | https://social.links.dragi.app/?utm_source=tiktok&utm_medium=social&utm_campaign=app_download&utm_content=bio |
-| YouTube — посилання профілю | https://social.links.dragi.app/?utm_source=youtube&utm_medium=social&utm_campaign=app_download&utm_content=channel_profile |
+Готові адреси для профілів після публікації `/nmt/`.
 
-Ці адреси потрібно вставити у відповідні профілі. Для окремого відео або Stories змінюй `utm_content`, наприклад `video_20261015` або `story_20261015`. Усі значення — малими літерами. Спільне bio-посилання визначає соцмережу, але не конкретне відео, після якого його відкрили.
+| Напрям | Профіль | Посилання |
+| --- | --- | --- |
+| НМТ | Instagram `@dragi_space` | https://social.links.dragi.app/nmt/?utm_source=instagram&utm_medium=social&utm_campaign=nmt_app_download&utm_content=bio |
+| НМТ | TikTok `@dragi_space` | https://social.links.dragi.app/nmt/?utm_source=tiktok&utm_medium=social&utm_campaign=nmt_app_download&utm_content=bio |
+| НМТ | YouTube `@dragi_space` | https://social.links.dragi.app/nmt/?utm_source=youtube&utm_medium=social&utm_campaign=nmt_app_download&utm_content=channel_profile |
+| Мови | Instagram `@dragi_learn` | https://social.links.dragi.app/?utm_source=instagram&utm_medium=social&utm_campaign=languages_app_download&utm_content=bio |
+| Мови | TikTok `@dragi_learn` | https://social.links.dragi.app/?utm_source=tiktok&utm_medium=social&utm_campaign=languages_app_download&utm_content=bio |
+| Мови | YouTube `@dragi_languages` | https://social.links.dragi.app/?utm_source=youtube&utm_medium=social&utm_campaign=languages_app_download&utm_content=channel_profile |
 
-Мова визначається як раніше. За потреби до будь-якої адреси можна додати `&lan=uk`, `&lan=en`, `&lan=de` або `&lan=es`. Перемикання мови зберігає UTM-параметри. На внутрішні переходи та посилання магазинів ці UTM-мітки не копіюються: джерело входу фіксує GA4.
+Для окремого відео або Stories змінюй `utm_content`, наприклад `video_20261107` або `story_20261107`. Усі значення пиши малими літерами. Спільне bio-посилання визначає платформу й місце розміщення. Для атрибуції конкретного відео потрібне посилання з його власним `utm_content`.
+
+Сторінка `/nmt/` завжди українською. До адрес мовних профілів можна додати `&lan=uk`, `&lan=en`, `&lan=de` або `&lan=es`. Перемикання мови зберігає UTM. GA4 фіксує джерело на вході, а посилання магазинів містять лише параметри магазину.
 
 ## Події
 
@@ -27,13 +32,15 @@ GA4: **Dragi Social Linktree**, ресурс `559265832`, вебпотік `1613
 | `social_click` | Натискання на соцмережу; параметр `social_network` |
 | `language_change` | Ручне перемикання мови |
 
-Кожна власна подія містить `page_language` (`en`, `uk`, `de`, `es`) — поточну мову сторінки. Вбудована метрика Language у GA4 описує мову браузера. Автоматичну enhanced measurement вимкнено, щоб не дублювати натискання окремою подією `click`.
+Кожна власна подія містить `page_language` (`en`, `uk`, `de`, `es`) і `page_direction` (`nmt` або `languages`). Напрямок визначається за сторінкою, на якій сталася подія. Автоматичну enhanced measurement вимкнено, щоб не дублювати натискання окремою подією `click`.
 
 ## Як читати загальний звіт
 
 Збережений звіт: [Dragi — трафік і переходи до магазинів](https://analytics.google.com/analytics/web/#/a353973116p559265832/reports/explorer?r=16138426258). Він також є в **Reports → Library**. Основний розріз — **Session source / medium**: `instagram / social`, `tiktok / social`, `youtube / social`, а також прямі й інші переходи. У ресурсі також налаштовано зведення маркетингового трафіку.
 
-Порівнюй користувачів, сеанси, ключові події та **Session key event rate**. Останній показник — частка сеансів, у яких натиснули хоча б одну кнопку магазину. Він не дорівнює кількості натискань, поділеній на перегляди: одна людина може натиснути декілька разів. Для розподілу між магазинами дивись події `app_store_click` та `play_store_click`.
+Для порівняння напрямків відкрий **Landing page** і додай **Session source / medium**. Рядок `/nmt/` показує сеанси, що почалися зі сторінки НМТ, а `/` показує сеанси, що почалися з мовної сторінки. **Session campaign** розрізняє розмічені кампанії. Старі посилання з `app_download` і далі ведуть на `/` та відображаються під старою назвою кампанії.
+
+Порівнюй сеанси, ключові події `app_store_click` та `play_store_click` і частку сеансів із натисканням кнопки магазину. **Landing page** відповідає на питання, з якого напрямку почався сеанс. Для розрізу за сторінкою, де натиснули кнопку, у GA4 потрібно зареєструвати подієвий параметр **Page direction** у **Admin → Custom definitions → Create custom dimension**. Вибери область **Event** і параметр `page_direction`. Потім у **Explore** можна зіставити **Page direction**, **Session source / medium** і **Event name** та порахувати **Event count** для двох магазинів.
 
 Натискання на магазин не підтверджує встановлення застосунку. Для встановлень потрібна окрема атрибуція на стороні App Store / Google Play / застосунку.
 
