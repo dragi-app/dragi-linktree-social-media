@@ -1,6 +1,6 @@
 # Dragi Linktree Social Media
 
-A mobile-first app download hub for Dragi's social profiles. Static HTML, CSS and JavaScript; no build or runtime dependencies. Fonts are local. Google Analytics 4 loads automatically on the production hostname, without a confirmation banner.
+A mobile-first app download hub for Dragi's social profiles. Static HTML, CSS and JavaScript; no build or runtime dependencies. Fonts are local. Google Analytics 4 loads automatically on the production hostname. TikTok Pixel loads after marketing cookie consent when a Pixel ID is configured.
 
 ## Local preview
 
@@ -32,11 +32,12 @@ Social handles remain in their original language. Without JavaScript, the comple
 - `index.html`: semantic structure, English fallback, links and inline icons.
 - `nmt/index.html`: Ukrainian НМТ landing page, subjects, and resources.
 - `style.css`: responsive design, animated gradient, hover/press effects and reduced-motion support.
-- `app.js`: translations, locale selection and small pointer interactions.
+- `app.js`: translations, locale selection, store campaign links and pointer interactions.
 - `analytics.js`: GA4 visit/button tracking. See [ANALYTICS.md](./ANALYTICS.md) for profile links and reporting.
+- `tiktok-pixel.js`: TikTok marketing consent and Pixel events. See [ANALYTICS.md](./ANALYTICS.md) for campaign links and setup.
 - `assets/`: locally hosted Dragi brand assets and Manrope variable font (SIL Open Font License; see `FONT-LICENSE.txt`). Dragi mascot sourced from https://progress.dragi.app/assets/mascot.png; app icon reused from the existing Dragi link hub.
 
-Store links are ordinary anchors in the same tab so mobile store handoff and in-app browsers can use their native navigation. The ripple never intercepts or delays navigation. Social and Progress links open a separate tab with `noopener noreferrer`. Animations stop for `prefers-reduced-motion: reduce`. No device-based redirection hides either store.
+Store links use the same tab. When TikTok Pixel is active, an ordinary store click queues `Download` and gives the pixel 300 ms before navigation. Modified clicks retain their native behavior. Social and Progress links open a separate tab with `noopener noreferrer`. Animations stop for `prefers-reduced-motion: reduce`. Both stores are available on all devices.
 
 ## Content and motion
 
@@ -52,4 +53,4 @@ Open **Settings → Pages → Deploy from a branch → main → / (root)**. All 
 
 Published URL: https://social.links.dragi.app/
 
-`CNAME` preserves the owner's custom domain `social.links.dragi.app`. If it changes, update the absolute `og:image` URL and the production hostname/cookie domain in `analytics.js`.
+`CNAME` preserves the owner's custom domain `social.links.dragi.app`. If it changes, update the absolute `og:image` URL, the production hostname and cookie domain in `analytics.js`, and the production hostname in `tiktok-pixel.js`.

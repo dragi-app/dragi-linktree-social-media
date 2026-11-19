@@ -19,7 +19,36 @@ GA4: **Dragi Social Linktree**, ресурс `559265832`, вебпотік `1613
 
 Для окремого відео або Stories змінюй `utm_content`, наприклад `video_20261107` або `story_20261107`. Усі значення пиши малими літерами. Спільне bio-посилання визначає платформу й місце розміщення. Для атрибуції конкретного відео потрібне посилання з його власним `utm_content`.
 
-Сторінка `/nmt/` завжди українською. До адрес мовних профілів можна додати `&lan=uk`, `&lan=en`, `&lan=de` або `&lan=es`. Перемикання мови зберігає UTM. GA4 фіксує джерело на вході, а посилання магазинів містять лише параметри магазину.
+Сторінка `/nmt/` завжди українською. До адрес мовних профілів можна додати `&lan=uk`, `&lan=en`, `&lan=de` або `&lan=es`. Перемикання мови зберігає UTM. GA4 фіксує джерело на вході. Google Play отримує UTM у параметрі `referrer`, а App Store після налаштування токена отримує `utm_content` у параметрі `ct`.
+
+## TikTok Ads · англійська для українців (D307, T145)
+
+Встав готову адресу в кожне оголошення вручну. Вимкни UTM Auto attach або звір п’ять UTM у прев’ю оголошення. TikTok додає `ttclid` автоматично.
+
+| Група (`utm_term`) | Посилання оголошення (`utm_content`) |
+| --- | --- |
+| `ag1_situatsiia` | [a1_parmezan_sytuatsiia](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag1_situatsiia&utm_content=a1_parmezan_sytuatsiia) |
+| `ag1_situatsiia` | [a2_parmezan_ekran](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag1_situatsiia&utm_content=a2_parmezan_ekran) |
+| `ag1_situatsiia` | [a3_dzvinok](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag1_situatsiia&utm_content=a3_dzvinok) |
+| `ag2_serial` | [b1_serial_treiler](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag2_serial&utm_content=b1_serial_treiler) |
+| `ag2_serial` | [b2_povtory_za_marko](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag2_serial&utm_content=b2_povtory_za_marko) |
+| `ag2_serial` | [b3_shcho_vidpovist](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag2_serial&utm_content=b3_shcho_vidpovist) |
+| `ag3_bil` | [c1_kontrol_new2](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag3_bil&utm_content=c1_kontrol_new2) |
+| `ag3_bil` | [c2_nepravylno_chomu](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag3_bil&utm_content=c2_nepravylno_chomu) |
+| `ag3_bil` | [c3_perekladaiu](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag3_bil&utm_content=c3_perekladaiu) |
+| `ag4_statyka` | [k1_serial_karusel](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag4_statyka&utm_content=k1_serial_karusel) |
+| `ag4_statyka` | [k2_parmezan_karusel](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag4_statyka&utm_content=k2_parmezan_karusel) |
+| `ag4_statyka` | [k3_dzvinok_karusel](https://social.links.dragi.app/?lan=uk&utm_source=tiktok&utm_medium=paid_social&utm_campaign=tt_ua_en_traffic_01&utm_term=ag4_statyka&utm_content=k3_dzvinok_karusel) |
+
+### Увімкнення і перевірка
+
+1. Вебпіксель `Dragi landing` налаштовано в [tiktok-pixel.js](./tiktok-pixel.js). Він запускається на робочому домені після згоди на маркетингові cookie. Змінити згоду можна у футері. [Довідка TikTok](https://ads.tiktok.com/resources/help/article/get-started-pixel)
+2. Після публікації відкрий одне з посилань оголошення. У Chrome з **TikTok Pixel Helper** перевір, що після згоди є `PageView`, а обидві кнопки відправляють `Download` з `content_name` `google_play` і `app_store` відповідно. Повтори в **TikTok Events Manager → Test Events**. Перевір також, що після відмови піксель не запускається. [TikTok Pixel Helper](https://ads.tiktok.com/resources/help/article/TikTok-pixel-helper-2.0)
+3. Перевір, що посилання Google Play містить усі п’ять значень UTM. У консолі браузера розкодуй вкладений параметр командою `Object.fromEntries(new URLSearchParams(new URL(document.querySelector('#google-play').href).searchParams.get('referrer')))`. Фактичну атрибуцію встановлення та подій у застосунку перевіряють окремим встановленням з магазину. [Google Play Install Referrer](https://developer.android.com/google/play/installreferrer)
+
+За потреби атрибуцію встановлень з App Store можна підключити окремо. Значення `pt` із кампанійного посилання Dragi в **App Store Connect → Analytics → Campaigns** заповнює `APP_STORE_PROVIDER_TOKEN` у [app.js](./app.js). Сайт додає `pt`, `ct` (до 40 символів із `utm_content`) і `mt=8` до посилання на App Store. [Довідка Apple](https://developer.apple.com/help/app-store-connect-analytics/acquisition/campaign-links/)
+
+За D307 тест використовує **Traffic → Website → Landing Page View**. Піксель вимірює переходи в магазини як `Download`. TikTok вказує **Sales** як вебціль, що підтримує оптимізацію за `Download`. [Стандартні події TikTok](https://ads.tiktok.com/resources/help/article/standard-events-parameters)
 
 ## Події
 
@@ -50,4 +79,4 @@ GA4: **Dragi Social Linktree**, ресурс `559265832`, вебпотік `1613
 
 Статистика охоплює відвідувачів, які не блокують Google Analytics. Минулі відвідування не відновлюються. Для оперативної перевірки є Realtime; звичайні звіти обробляються із затримкою.
 
-На localhost, GitHub preview та інших доменах Google tag не завантажується і події не надсилаються. Це дозволяє перевіряти сайт без забруднення робочої статистики. Обробники натискань не затримують і не перехоплюють навігацію.
+На localhost, GitHub preview та інших доменах Google tag не завантажується і події не надсилаються. Це дозволяє перевіряти сайт без забруднення робочої статистики.
