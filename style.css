@@ -144,7 +144,7 @@ h2 { font-size: 31px; line-height: 1.2; letter-spacing: -.04em; margin: 0; font-
 .footer-legal { display: flex; align-items: center; gap: 16px; }
 .footer-legal > a, .marketing-consent-settings { text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: flex; align-items: center; }
 .marketing-consent-settings { color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
-.marketing-consent { max-width: 410px; margin: 20px auto 0; padding: 12px 16px; border: 1px solid #fff5e74a; border-radius: 14px; background: #2b153f99; text-align: left; }
+.marketing-consent { width: calc(100% - 44px); max-width: 410px; margin: 0 auto 24px; padding: 12px 16px; border: 1px solid #fff5e74a; border-radius: 14px; background: #2b153f99; text-align: left; }
 .marketing-consent-copy { margin: 0 0 8px; color: #fff0e7; font-size: 12px; line-height: 1.6; }
 .marketing-consent-copy a { text-decoration: underline; text-underline-offset: 3px; }
 .marketing-consent-actions { display: flex; flex-wrap: wrap; gap: 8px; }

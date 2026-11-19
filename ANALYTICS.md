@@ -42,7 +42,7 @@ GA4: **Dragi Social Linktree**, ресурс `559265832`, вебпотік `1613
 
 ### Увімкнення і перевірка
 
-1. Вебпіксель `Dragi landing` налаштовано в [tiktok-pixel.js](./tiktok-pixel.js). Він запускається на робочому домені після згоди на маркетингові cookie. Змінити згоду можна у футері. [Довідка TikTok](https://ads.tiktok.com/resources/help/article/get-started-pixel)
+1. Вебпіксель `Dragi landing` налаштовано в [tiktok-pixel.js](./tiktok-pixel.js). Він запускається на робочому домені після того, як відвідувач дозволить маркетингові cookie в налаштуваннях футера. Там само можна змінити свій вибір. [Довідка TikTok](https://ads.tiktok.com/resources/help/article/get-started-pixel)
 2. Після публікації відкрий одне з посилань оголошення. У Chrome з **TikTok Pixel Helper** перевір, що після згоди є `PageView`, а обидві кнопки відправляють `Download` з `content_name` `google_play` і `app_store` відповідно. Повтори в **TikTok Events Manager → Test Events**. Перевір також, що після відмови піксель не запускається. [TikTok Pixel Helper](https://ads.tiktok.com/resources/help/article/TikTok-pixel-helper-2.0)
 3. Перевір, що посилання Google Play містить усі п’ять значень UTM. У консолі браузера розкодуй вкладений параметр командою `Object.fromEntries(new URLSearchParams(new URL(document.querySelector('#google-play').href).searchParams.get('referrer')))`. Фактичну атрибуцію встановлення та подій у застосунку перевіряють окремим встановленням з магазину. [Google Play Install Referrer](https://developer.android.com/google/play/installreferrer)
 

@@ -31,12 +31,13 @@
   };
 
   const panel = document.createElement('section');
+  panel.id = 'marketing-consent';
   panel.className = 'marketing-consent';
   panel.hidden = true;
   panel.innerHTML = `
     <p class="marketing-consent-copy"><span></span> <a href="https://dragi.app/privacy-policy" target="_blank" rel="noopener noreferrer"></a></p>
     <div class="marketing-consent-actions"><button type="button"></button><button type="button"></button></div>`;
-  document.querySelector('.hero-content').append(panel);
+  document.querySelector('.site-footer').after(panel);
   const description = panel.querySelector('span');
   const privacy = panel.querySelector('a');
   const [reject, accept] = panel.querySelectorAll('button');
@@ -44,12 +45,13 @@
   const settings = document.createElement('button');
   settings.type = 'button';
   settings.className = 'marketing-consent-settings';
+  settings.setAttribute('aria-controls', panel.id);
+  settings.setAttribute('aria-expanded', 'false');
   document.querySelector('.footer-legal').append(settings);
 
   let consent = null;
   let pixelStarted = false;
   let pixelFailed = false;
-  let returnFocus = null;
   let storeNavigationPending = false;
 
   function renderCopy() {
@@ -94,29 +96,31 @@
   }
 
   function applyConsent(choice) {
-    if (choice !== consent) {
-      consent = choice;
-      if (pixelStarted) {
-        if (choice === 'granted') window.ttq.grantConsent();
-        else window.ttq.revokeConsent();
-      } else if (choice === 'granted') {
-        startPixel();
-      }
+    if (choice === consent) return;
+    consent = choice;
+    if (pixelStarted) {
+      if (choice === 'granted') window.ttq.grantConsent();
+      else window.ttq.revokeConsent();
+    } else if (choice === 'granted') {
+      startPixel();
     }
-    panel.hidden = choice === 'granted' || choice === 'denied';
+  }
+
+  function toggleSettings(open) {
+    panel.hidden = !open;
+    settings.setAttribute('aria-expanded', String(open));
   }
 
   function saveConsent(choice) {
     try { localStorage.setItem(CONSENT_KEY, choice); } catch { /* The choice still applies to this page. */ }
     applyConsent(choice);
-    (returnFocus || document.getElementById('app-store')).focus({ preventScroll: true });
-    returnFocus = null;
+    toggleSettings(false);
+    settings.focus();
   }
 
   settings.addEventListener('click', () => {
-    returnFocus = settings;
-    panel.hidden = false;
-    reject.focus();
+    toggleSettings(panel.hidden);
+    if (!panel.hidden) reject.focus();
   });
   reject.addEventListener('click', () => saveConsent('denied'));
   accept.addEventListener('click', () => saveConsent('granted'));
@@ -129,7 +133,7 @@
 
   renderCopy();
   let savedConsent = null;
-  try { savedConsent = localStorage.getItem(CONSENT_KEY); } catch { /* Prompt when storage is unavailable. */ }
+  try { savedConsent = localStorage.getItem(CONSENT_KEY); } catch { /* The settings still work without storage. */ }
   applyConsent(savedConsent);
 
   for (const [id, name] of [['google-play', 'google_play'], ['app-store', 'app_store']]) {
