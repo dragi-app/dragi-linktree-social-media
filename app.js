@@ -110,6 +110,14 @@
   };
 
   const STORAGE_KEY = 'dragi-social.language';
+  const APP_STORE_PROVIDER_TOKEN = '';
+  const campaign = new URLSearchParams();
+  const landingParams = new URLSearchParams(location.search);
+  for (const name of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) {
+    const value = landingParams.get(name);
+    if (value) campaign.set(name, value);
+  }
+  const referrer = campaign.toString();
   const picker = document.getElementById('language');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -132,6 +140,23 @@
     return 'en';
   }
 
+  function renderStoreLinks(language) {
+    const apple = new URL('https://apps.apple.com/us/app/dragi-language-learning/id6502047535');
+    apple.searchParams.set('l', language);
+    const campaignToken = [...(campaign.get('utm_content') || '').trim()].slice(0, 40).join('').trimEnd();
+    if (APP_STORE_PROVIDER_TOKEN && campaignToken) {
+      apple.searchParams.set('pt', APP_STORE_PROVIDER_TOKEN);
+      apple.searchParams.set('ct', campaignToken);
+      apple.searchParams.set('mt', '8');
+    }
+    document.getElementById('app-store').href = apple.href;
+
+    const google = new URL('https://play.google.com/store/apps/details?id=ua.dragi.education');
+    google.searchParams.set('hl', language);
+    if (referrer) google.searchParams.set('referrer', referrer);
+    document.getElementById('google-play').href = google.href;
+  }
+
   function render(language) {
     const copy = COPY[language];
     document.documentElement.lang = language;
@@ -146,12 +171,7 @@
       element.setAttribute('aria-label', copy[element.dataset.copyAria]);
     });
     document.getElementById('progress-link').href = `https://progress.dragi.app/${language}/`;
-    const apple = new URL('https://apps.apple.com/us/app/dragi-language-learning/id6502047535');
-    apple.searchParams.set('l', language);
-    document.getElementById('app-store').href = apple.href;
-    const google = new URL('https://play.google.com/store/apps/details?id=ua.dragi.education');
-    google.searchParams.set('hl', language);
-    document.getElementById('google-play').href = google.href;
+    renderStoreLinks(language);
     picker.value = language;
   }
 
@@ -164,7 +184,7 @@
     render(language);
   });
 
-  // Native links navigate immediately. Animation never delays a store opening.
+  // The tap animation leaves navigation to the store link.
   document.querySelectorAll('.store-button').forEach(button => {
     button.addEventListener('pointerdown', event => {
       if (reducedMotion.matches || (event.pointerType === 'mouse' && event.button !== 0)) return;
@@ -202,6 +222,15 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
   if (picker) render(initialLanguage());
+  else renderStoreLinks(document.documentElement.lang);
+
+  if (referrer) {
+    document.querySelectorAll('.nmt-language-link').forEach(link => {
+      const url = new URL(link.href);
+      for (const [name, value] of campaign) url.searchParams.set(name, value);
+      link.href = url.href;
+    });
+  }
 
   // Reveal lower-page links once they enter the viewport; static links remain
   // visible when JavaScript, IntersectionObserver or motion is unavailable.
